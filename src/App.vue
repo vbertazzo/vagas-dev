@@ -1,5 +1,10 @@
 <template>
-  <the-header></the-header>
+  <div class="flex flex-col min-h-screen">
+    <the-header></the-header>
+    <router-view v-slot="{ Component }">
+      <component class="flex-grow" :is="Component"></component>
+    </router-view>
+  </div>
 </template>
 
 <script setup>
