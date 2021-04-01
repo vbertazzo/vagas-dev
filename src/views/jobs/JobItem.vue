@@ -24,28 +24,31 @@
   </li>
 </template>
 
-<script lang="ts">
+<script setup>
+import { computed, defineProps } from 'vue'
 import { parseISO, formatDistance } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 
-export default {
-  props: {
-    job: Object
-  },
-  setup (props) {
-    const timeDistance = formatDistance(
-      parseISO(props.job?.created_at),
-      new Date(),
+const props = defineProps({
+  job: {
+    labels: [
       {
-        addSuffix: true,
-        locale: pt
+        id: Number,
+        name: String
       }
-    )
-
-    return {
-      job: props.job,
-      timeDistance
+    ],
+    title: String,
+    user: {
+      avatar_url: String,
+      login: String
     }
   }
-}
+})
+
+const timeDistance = computed(() => {
+  return formatDistance(parseISO(props.job?.created_at), new Date(), {
+    addSuffix: true,
+    locale: pt
+  })
+})
 </script>
