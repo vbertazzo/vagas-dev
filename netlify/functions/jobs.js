@@ -19,11 +19,11 @@ exports.handler = async function (event, context) {
     'Vuejs-BR'
   ]
 
-  const repositoryName = event.queryStringParameters.name
+  const repository = event.queryStringParameters.repository
   const perPage = event.queryStringParameters.perPage
   const page = event.queryStringParameters.page
 
-  const url = new URL(`${BASE_URL}/repos/${repositoryName}/vagas/issues`)
+  const url = new URL(`${BASE_URL}/repos/${repository}/vagas/issues`)
   url.search = new URLSearchParams({
     per_page: perPage,
     page,
@@ -37,7 +37,7 @@ exports.handler = async function (event, context) {
       )
     }
 
-    if (!repositories.some(repo => repo === repositoryName)) {
+    if (!repositories.some(repo => repo === repository)) {
       throw Error('The repository is not valid.')
     }
 
