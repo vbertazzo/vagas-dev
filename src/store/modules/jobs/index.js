@@ -6,8 +6,58 @@ export default {
   namespaced: true,
   state () {
     return {
-      lastFetch: null,
-      jobs: []
+      jobs: {
+        AndroidDevBr: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        },
+        'Backend-BR': {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        },
+        CocoaHeadsBrasil: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        },
+        FrontendBR: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        },
+        Gommunity: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        },
+        PHPDevBR: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        },
+        UXBrasil: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        },
+        'Vuejs-BR': {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null
+        }
+      },
+      paginatedJobs: [],
+      currentPage: 1
     }
   },
   actions,
