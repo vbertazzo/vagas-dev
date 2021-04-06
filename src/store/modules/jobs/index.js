@@ -56,8 +56,7 @@ export default {
           retrievedPages: null
         }
       },
-      paginatedJobs: [],
-      currentPage: 1
+      paginatedJobs: []
     }
   },
   actions,

@@ -10,8 +10,10 @@ export default {
     )
 
     if (!response.ok) {
-      console.log('Failed to fetch jobs')
-      return
+      const error = new Error(
+        'Falha ao requisitar vagas. Por favor, tente novamente em breve.'
+      )
+      throw error
     }
 
     const responseData = await response.json()
@@ -25,16 +27,17 @@ export default {
     context.dispatch('setLoading', { isLoading: false }, { root: true })
   },
 
-  async loadPaginatedJobs (context, payload) {
+  loadPaginatedJobs (context, payload) {
     const PER_PAGE = 10
     const API_PER_PAGE = 100
+    const UPDATE_THRESHOLD = 80
 
     const { repository, page, action } = payload
 
     const jobs = context.state.jobs[repository].jobs
-    const updateThreshold = jobs.length - 20
+    const updateThreshold = jobs.length - (API_PER_PAGE - UPDATE_THRESHOLD)
 
-    const isLastPage = jobs.length % 10 !== 0
+    const isLastPage = jobs.length % PER_PAGE !== 0
     const startingIndex = page === 1 ? 0 : page * PER_PAGE - PER_PAGE
     const endingIndex = page * PER_PAGE
 
@@ -63,22 +66,5 @@ export default {
         page: nextPage
       })
     }
-  },
-
-  setCurrentPage (context, payload) {
-    const { repository, page, action } = payload
-
-    const isFirstPage = page === 0
-    const isLastPage = context.state.paginatedJobs.length < 10
-
-    if (
-      (isFirstPage && action === 'back') ||
-      (isLastPage && action === 'next')
-    ) {
-      return
-    }
-
-    context.commit('setCurrentPage', { page })
-    context.dispatch('loadPaginatedJobs', { repository, page, action })
   }
 }

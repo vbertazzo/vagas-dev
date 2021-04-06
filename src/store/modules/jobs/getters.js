@@ -4,8 +4,5 @@ export default {
   },
   paginatedJobs (state) {
     return state.paginatedJobs
-  },
-  currentPage (state) {
-    return state.currentPage
   }
 }

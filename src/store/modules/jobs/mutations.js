@@ -16,9 +16,5 @@ export default {
 
   setPaginatedJobs (state, payload) {
     state.paginatedJobs = payload.paginatedJobs
-  },
-
-  setCurrentPage (state, payload) {
-    state.currentPage = payload.page
   }
 }

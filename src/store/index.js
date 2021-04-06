@@ -1,12 +1,14 @@
 import { createStore } from 'vuex'
 
 import jobsModule from './modules/jobs/index.js'
+import paginationModule from './modules/pagination/index.js'
 
 const store = createStore({
-  modules: { jobs: jobsModule },
+  modules: { jobs: jobsModule, pagination: paginationModule },
   state () {
     return {
-      isLoading: false
+      isLoading: false,
+      selectedRepository: 'FrontendBR'
     }
   },
   actions: {
@@ -17,6 +19,9 @@ const store = createStore({
   getters: {
     isLoading (state) {
       return state.isLoading
+    },
+    selectedRepository (state) {
+      return state.selectedRepository
     }
   },
   mutations: {
