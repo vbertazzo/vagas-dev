@@ -1,6 +1,6 @@
 <template>
   <li
-    class="w-11/12 px-4 py-2 border rounded-md flex flex-col shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 hover:scale-105 hover:border-gray-300 md:flex-row"
+    class="w-full px-4 py-2 border rounded-md flex flex-col shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 hover:scale-105 hover:border-gray-300 md:flex-row"
   >
     <div class="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden hidden">
       <img

@@ -1,7 +1,14 @@
 <template>
-  <section class="my-4 flex flex-col items-center">
+  <section class="w-11/12 max-w-lg my-4 mx-auto flex flex-col items-center">
     <ul
-      class="mb-4 max-w-3xl space-y-2 flex flex-col items-center md:space-y-3"
+      v-if="isLoading"
+      class="w-full mb-4 space-y-2 flex flex-col items-center md:space-y-3"
+    >
+      <job-item-shimmer v-for="_ in 10"></job-item-shimmer>
+    </ul>
+    <ul
+      v-else
+      class="w-full mb-4 space-y-2 flex flex-col items-center md:space-y-3"
     >
       <job-item v-for="job in jobs" :key="job.id" :job="job"></job-item>
     </ul>
@@ -10,10 +17,11 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount } from 'vue'
+import { computed, onBeforeMount, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import JobItem from './JobItem.vue'
+import JobItemShimmer from '../../components/jobs/JobItemShimmer.vue'
 
 const store = useStore()
 
@@ -21,11 +29,15 @@ onBeforeMount(() => {
   getJobs()
 })
 
+const isLoading = ref(false)
+
 const selectedRepository = computed(() => {
   return store.getters['selectedRepository']
 })
 
 const getJobs = async () => {
+  isLoading.value = true
+
   try {
     await store.dispatch('jobs/loadJobs', {
       repository: selectedRepository.value,
@@ -39,6 +51,7 @@ const getJobs = async () => {
     // TODO: error handling
     console.log(error)
   }
+  isLoading.value = false
 }
 
 const jobs = computed(() => {
