@@ -15,29 +15,19 @@ export default {
     context.commit('setCurrentPage', { page })
   },
 
-  async loadTotalNumberOfPages (context, payload) {
+  loadTotalNumberOfPages (context, payload) {
     const PER_PAGE = 10
 
     const { repository } = payload
 
-    context.dispatch('setLoading', { isLoading: true }, { root: true })
-
-    const response = await fetch(
-      `.netlify/functions/totalJobs?repository=${repository}`
-    )
-
-    if (!response.ok) {
-      const error = new Error('Failed to fetch jobs count')
-      throw error
+    const totalJobs = context.rootState.jobs.jobs[repository].totalJobs
+    if (!totalJobs) {
+      return
     }
 
-    const { jobs } = await response.json()
-
-    const numberOfPages = Math.ceil(jobs / PER_PAGE)
+    const numberOfPages = Math.ceil(totalJobs / PER_PAGE)
 
     context.commit('setTotalNumberOfPages', { total: numberOfPages })
-
-    context.dispatch('setLoading', { isLoading: false }, { root: true })
   },
 
   setFirstPage (context, payload) {

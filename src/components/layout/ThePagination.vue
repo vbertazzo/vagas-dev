@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, onUnmounted, onMounted, ref } from 'vue'
+import { computed, onUnmounted, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -53,15 +53,12 @@ const store = useStore()
 const disabled = ref(false)
 let timeout = null
 
-onBeforeMount(() => {
-  getNumberOfPages()
-})
-
 onUnmounted(() => {
   clearTimeout(timeout)
 })
 
 onMounted(() => {
+  loadNumberOfPages()
   checkFirstAndLastPages()
 })
 
@@ -89,7 +86,11 @@ const isLastPage = computed(() => {
   return store.getters['pagination/isLastPage']
 })
 
-const getNumberOfPages = async () => {
+const totalJobs = computed(() => {
+  return store.getters['jobs/jobs'][selectedRepository.value].totalJobs
+})
+
+const loadNumberOfPages = async () => {
   await store.dispatch('pagination/loadTotalNumberOfPages', {
     repository: selectedRepository.value
   })
@@ -111,19 +112,39 @@ const handlePageChange = async action => {
 
   const page = action === 'next' ? currentPage.value + 1 : currentPage.value - 1
 
-  await store.dispatch('pagination/setCurrentPage', {
+  store.dispatch('pagination/setCurrentPage', {
     page,
     action
   })
 
-  await store.dispatch('jobs/loadPaginatedJobs', {
+  store.dispatch('jobs/loadPaginatedJobs', {
     repository: selectedRepository.value,
     page,
     action
   })
 
   checkFirstAndLastPages()
+  moveScrollToTop()
+}
 
+const moveScrollToTop = () => {
   window.scrollTo(0, 0)
 }
+
+const resetCurrentPage = () => {
+  store.dispatch('pagination/setCurrentPage', {
+    page: 1,
+    action: null
+  })
+}
+
+watch(selectedRepository, () => {
+  checkFirstAndLastPages()
+  moveScrollToTop()
+  resetCurrentPage()
+})
+
+watch(totalJobs, () => {
+  loadNumberOfPages()
+})
 </script>

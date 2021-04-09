@@ -14,6 +14,9 @@ const store = createStore({
   actions: {
     setLoading (context, payload) {
       context.commit('setLoading', { isLoading: payload.isLoading })
+    },
+    setSelectedRepository (context, payload) {
+      context.commit('setSelectedRepository', payload)
     }
   },
   getters: {
@@ -27,6 +30,9 @@ const store = createStore({
   mutations: {
     setLoading (state, payload) {
       state.isLoading = payload.isLoading
+    },
+    setSelectedRepository (state, payload) {
+      state.selectedRepository = payload
     }
   }
 })

@@ -4,7 +4,18 @@ export default {
 
     const { repository, page } = payload
 
+    const { retrievedPages, totalJobs } = context.state.jobs[repository]
+
+    if (retrievedPages >= page) {
+      return
+    }
+
     context.dispatch('setLoading', { isLoading: true }, { root: true })
+
+    if (!totalJobs) {
+      context.dispatch('fetchTotalJobs', { repository })
+    }
+
     const response = await fetch(
       `.netlify/functions/jobs?repository=${repository}&perPage=${API_PER_PAGE}&page=${page}`
     )
@@ -24,6 +35,7 @@ export default {
       repository,
       amount: page
     })
+
     context.dispatch('setLoading', { isLoading: false }, { root: true })
   },
 
@@ -66,5 +78,24 @@ export default {
         page: nextPage
       })
     }
+  },
+
+  async fetchTotalJobs (context, payload) {
+    const { repository } = payload
+
+    context.dispatch('setLoading', { isLoading: true }, { root: true })
+    const response = await fetch(
+      `.netlify/functions/totalJobs?repository=${repository}`
+    )
+
+    if (!response.ok) {
+      const error = new Error('Failed to fetch jobs count')
+      throw error
+    }
+
+    const { jobs } = await response.json()
+
+    context.commit('setTotalJobs', { repository, totalJobs: jobs })
+    context.dispatch('setLoading', { isLoading: false }, { root: true })
   }
 }

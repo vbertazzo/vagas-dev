@@ -6,7 +6,10 @@ module.exports = {
   },
   variants: {
     extend: {
-      opacity: ['disabled']
+      opacity: ['disabled'],
+      ringColor: ['focus-visible', 'focus'],
+      ringWidth: ['focus-visible'],
+      backgroundColor: ['focus-visible']
     }
   },
   plugins: [require('@tailwindcss/forms')]

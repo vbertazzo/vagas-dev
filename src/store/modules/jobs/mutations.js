@@ -16,5 +16,10 @@ export default {
 
   setPaginatedJobs (state, payload) {
     state.paginatedJobs = payload.paginatedJobs
+  },
+
+  setTotalJobs (state, payload) {
+    const { repository, totalJobs } = payload
+    state.jobs[repository].totalJobs = totalJobs
   }
 }

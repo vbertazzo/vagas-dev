@@ -4,7 +4,7 @@
 
     <router-view v-slot="{ Component }">
       <component
-        @touchstart="hideMenuButton"
+        @touchmove="hideMenuButton"
         @touchend="showMenuButton"
         :is="Component"
       ></component>
@@ -18,7 +18,7 @@
       <base-fab
         v-if="!menuButtonIsHidden"
         @click="openMenu"
-        class="bg-indigo-500 text-white md:hidden"
+        class="bg-indigo-500 text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 focus-visible:bg-indigo-700 md:hidden"
         :class="menuPosition"
         title="Abrir menu"
         aria-label="Abrir menu"
@@ -39,18 +39,24 @@
       ></base-fab>
     </transition>
 
-    <the-menu
-      @close-menu="closeMenu"
-      @save-settings="loadSettings"
-      :menuIsOpen="menuIsOpen"
-    ></the-menu>
+    <teleport to="#app">
+      <the-menu
+        @close-menu="closeMenu"
+        @save-settings="loadSettings"
+        :menuIsOpen="menuIsOpen"
+      ></the-menu>
+    </teleport>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+
 import TheHeader from './components/layout/TheHeader.vue'
-import TheMenu from './components/layout/TheMenu.vue'
+import TheMenu from './components/menu/TheMenu.vue'
+
+const store = useStore()
 
 const menuIsOpen = ref(false)
 const menuButtonIsHidden = ref(false)
@@ -83,8 +89,13 @@ const changeMenuButtonPosition = position => {
 }
 
 const loadSettings = settings => {
-  const { menuButtonPosition } = settings
-  changeMenuButtonPosition(menuButtonPosition.value)
+  const { menuButtonPosition, repository } = settings
+
+  if (repository) {
+    store.dispatch('setSelectedRepository', repository)
+  }
+
+  changeMenuButtonPosition(menuButtonPosition)
   closeMenu()
 }
 </script>

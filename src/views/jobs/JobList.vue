@@ -12,16 +12,17 @@
     >
       <job-item v-for="job in jobs" :key="job.id" :job="job"></job-item>
     </ul>
-    <base-pagination v-if="jobs.length !== 0"></base-pagination>
+    <the-pagination v-if="jobs.length !== 0"></the-pagination>
   </section>
 </template>
 
 <script setup>
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 
 import JobItem from './JobItem.vue'
 import JobItemShimmer from '../../components/jobs/JobItemShimmer.vue'
+import ThePagination from '../../components/layout/ThePagination.vue'
 
 const store = useStore()
 
@@ -35,6 +36,10 @@ const selectedRepository = computed(() => {
   return store.getters['selectedRepository']
 })
 
+const jobs = computed(() => {
+  return store.getters['jobs/paginatedJobs']
+})
+
 const getJobs = async () => {
   isLoading.value = true
 
@@ -43,18 +48,18 @@ const getJobs = async () => {
       repository: selectedRepository.value,
       page: 1
     })
-    await store.dispatch('jobs/loadPaginatedJobs', {
+    store.dispatch('jobs/loadPaginatedJobs', {
       repository: selectedRepository.value,
       page: 1
     })
-  } catch (error) {
+  } catch (err) {
     // TODO: error handling
-    console.log(error)
+    console.log(err)
   }
   isLoading.value = false
 }
 
-const jobs = computed(() => {
-  return store.getters['jobs/paginatedJobs']
+watch(selectedRepository, () => {
+  getJobs()
 })
 </script>
