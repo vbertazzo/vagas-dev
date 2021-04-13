@@ -10,7 +10,12 @@
       v-else
       class="w-full mb-4 space-y-2 flex flex-col items-center md:space-y-3"
     >
-      <job-item v-for="job in jobs" :key="job.id" :job="job"></job-item>
+      <job-item
+        v-for="job in jobs"
+        :key="job.id"
+        :job="job"
+        :repository="selectedRepository"
+      ></job-item>
     </ul>
     <the-pagination v-if="jobs.length !== 0"></the-pagination>
   </section>

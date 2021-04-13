@@ -8,11 +8,13 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.3.2",
+    "@tailwindcss/typography": "^0.4.0",
     "animate.css": "^4.1.1",
     "date-fns": "^2.19.0",
     "node-fetch": "^2.6.1",
     "vue": "^3.0.5",
     "vue-router": "^4.0.5",
+    "vue-showdown": "^3.0.0",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
