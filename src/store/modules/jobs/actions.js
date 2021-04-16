@@ -22,9 +22,9 @@ export default {
 
     if (!response.ok) {
       const error = new Error(
-        'Falha ao requisitar vagas. Por favor, tente novamente em breve.'
+        'Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em breve.'
       )
-      throw error
+      context.dispatch('setError', { error }, { root: true })
     }
 
     const responseData = await response.json()
@@ -89,8 +89,10 @@ export default {
     )
 
     if (!response.ok) {
-      const error = new Error('Failed to fetch jobs count')
-      throw error
+      const error = new Error(
+        'Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em breve.'
+      )
+      context.dispatch('setError', { error }, { root: true })
     }
 
     const { jobs } = await response.json()

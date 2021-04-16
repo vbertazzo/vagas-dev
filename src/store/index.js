@@ -8,7 +8,8 @@ const store = createStore({
   state () {
     return {
       isLoading: false,
-      selectedRepository: 'FrontendBR'
+      selectedRepository: 'FrontendBR',
+      error: null
     }
   },
   actions: {
@@ -17,6 +18,12 @@ const store = createStore({
     },
     setSelectedRepository (context, payload) {
       context.commit('setSelectedRepository', payload)
+    },
+    setError (context, payload) {
+      context.commit('setError', payload)
+    },
+    dismissError (context) {
+      context.commit('dismissError')
     }
   },
   getters: {
@@ -25,6 +32,9 @@ const store = createStore({
     },
     selectedRepository (state) {
       return state.selectedRepository
+    },
+    error (state) {
+      return state.error
     }
   },
   mutations: {
@@ -33,6 +43,12 @@ const store = createStore({
     },
     setSelectedRepository (state, payload) {
       state.selectedRepository = payload
+    },
+    setError (state, payload) {
+      state.error = payload
+    },
+    dismissError (state) {
+      state.error = null
     }
   }
 })
