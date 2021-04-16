@@ -85,7 +85,14 @@ const error = ref('')
 const isLoading = ref(false)
 
 const jobs = computed(() => {
-  return store.getters['jobs/jobs'][props.repository].jobs
+  try {
+    const getJobs = store.getters['jobs/jobs'][props.repository].jobs
+
+    return getJobs
+  } catch (err) {
+    error.value =
+      'Ocorreu um erro ao carregar a vaga. Por favor, verifique se as informações sobre o repositório estão corretas.'
+  }
 })
 
 const findJob = computed(() => {

@@ -19,8 +19,10 @@
         :repository="selectedRepository"
       ></job-item>
     </ul>
-    <the-pagination v-if="!error && jobs.length !== 0"></the-pagination>
-    <div v-else class="mt-4 flex flex-col items-center">
+    <the-pagination
+      v-if="!error && jobs.length !== 0 && !isLoading"
+    ></the-pagination>
+    <div v-if="error && !isLoading" class="mt-4 flex flex-col items-center">
       <p class="text-lg">
         Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em
         breve.
@@ -34,7 +36,7 @@
         Recarregar página
       </button>
     </div>
-    <p v-if="jobs.length === 0 && !isLoading" class="text-lg">
+    <p v-if="!error && jobs.length === 0 && !isLoading" class="text-lg">
       Nenhuma vaga encontrada.
     </p>
   </section>
@@ -73,17 +75,21 @@ const jobs = computed(() => {
 const getJobs = async () => {
   isLoading.value = true
 
-  await store.dispatch('jobs/loadJobs', {
-    repository: selectedRepository.value,
-    page: 1
-  })
+  try {
+    await store.dispatch('jobs/loadJobs', {
+      repository: selectedRepository.value,
+      page: 1
+    })
 
-  store.dispatch('jobs/loadPaginatedJobs', {
-    repository: selectedRepository.value,
-    page: 1
-  })
+    store.dispatch('jobs/loadPaginatedJobs', {
+      repository: selectedRepository.value,
+      page: 1
+    })
 
-  isLoading.value = false
+    isLoading.value = false
+  } catch (err) {
+    isLoading.value = false
+  }
 }
 
 const reloadPage = () => {

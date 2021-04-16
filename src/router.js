@@ -11,7 +11,8 @@ const router = createRouter({
       path: '/:repository/:jobNumber',
       component: () => import('./views/jobs/JobDetails.vue'),
       props: true
-    }
+    },
+    { path: '/:notFound(.*)', component: () => import('./views/NotFound.vue') }
   ],
   scrollBehavior (_, _2, savedPosition) {
     const resetPosition = { left: 0, top: 0 }
