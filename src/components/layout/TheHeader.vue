@@ -6,5 +6,6 @@
         <h1 class="ml-4 text-2xl font-bold uppercase">{{ '<Vagas Dev />' }}</h1>
       </router-link>
     </div>
+    <base-divider class="mb-0"></base-divider>
   </header>
 </template>
