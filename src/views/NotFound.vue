@@ -103,14 +103,8 @@
   <div class="flex flex-col justify-center items-center">
     <h3 class="font-semibold text-xl">Ops... Página não encontrada!</h3>
     <p class="mt-2">Verifique se as informações estão corretas.</p>
-    <button
-      type="button"
-      @click="goBack"
-      title="Voltar à página inicial"
-      class="mt-4 py-3 px-6 uppercase font-semibold text-white text-lg leading-6 border border-transparent rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none transition-colors duration-200"
-    >
-      Voltar
-    </button>
+    <base-button @click="goBack" title="Voltar à página inicial" text="Voltar">
+    </base-button>
   </div>
 </template>
 

@@ -51,16 +51,13 @@
 
           <the-filter @select-repository="handleRepositoryChange"></the-filter>
 
-          <div class="my-4 w-11/12 border-b"></div>
+          <div class="mt-4 w-11/12 border-b"></div>
 
-          <button
-            type="button"
+          <base-button
             @click="saveSettings"
             title="Aplicar Configurações"
-            class="px-8 py-3 bg-indigo-500 text-white font-bold uppercase text-base rounded shadow-md outline-none hover:bg-indigo-700 active:bg-indigo-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 focus-visible:bg-indigo-700 ease-linear transition-all duration-150"
-          >
-            Aplicar
-          </button>
+            text="Aplicar"
+          ></base-button>
         </div>
       </div>
     </transition>

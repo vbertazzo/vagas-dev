@@ -23,20 +23,20 @@
       v-if="!error && jobs.length !== 0 && !isLoading"
     ></the-pagination>
     <div v-if="error && !isLoading" class="mt-4 flex flex-col items-center">
-      <p class="text-lg">
+      <p class="text-lg leading-7">
         Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em
         breve.
       </p>
-      <button
-        type="button"
+      <base-button
         @click="reloadPage"
         title="Recarregar página"
-        class="mt-4 py-3 px-6 uppercase font-semibold text-white text-lg leading-6 border border-transparent rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none transition-colors duration-200"
-      >
-        Recarregar página
-      </button>
+        text="Recarregar"
+      ></base-button>
     </div>
-    <p v-if="!error && jobs.length === 0 && !isLoading" class="text-lg">
+    <p
+      v-if="!error && jobs.length === 0 && !isLoading"
+      class="text-lg leading-7"
+    >
       Nenhuma vaga encontrada.
     </p>
   </section>
