@@ -1,9 +1,14 @@
 <template>
-  <header class="flex flex-col justify-center items-center">
-    <div class="w-11/12 border-b"></div>
-    <div class="mt-3 w-full flex justify-center items-center">
-      <router-link to="/">
-        <h1 class="ml-4 text-2xl font-bold uppercase">{{ '<Vagas Dev />' }}</h1>
+  <header id="header" class="flex flex-col justify-center items-center ">
+    <div class="mt-3 w-full flex justify-center items-center ">
+      <router-link
+        to="/"
+        class="focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none"
+      >
+        <h1 class="text-2xl font-bold uppercase" aria-hidden="true">
+          {{ '<Vagas Dev />' }}
+        </h1>
+        <h1 class="sr-only">Vagas Dev</h1>
       </router-link>
     </div>
     <base-divider class="mb-0"></base-divider>

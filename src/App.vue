@@ -1,9 +1,19 @@
 <template>
+  <button
+    type="button"
+    @click="openMenu"
+    title=""
+    class="mt-2 ml-2 top-0 fixed z-10 w-px h-px overflow-hidden opacity-0 text-center bg-white text-indigo-700 focus:w-16 focus:h-auto focus:overflow-auto focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600"
+  >
+    Pular para o menu
+  </button>
+
   <div class="relative flex flex-col min-h-screen overflow-hidden">
     <the-header></the-header>
 
     <router-view v-slot="{ Component }">
       <component
+        role="main"
         @touchmove="hideMenuButton"
         @touchend="showMenuButton"
         :is="Component"
@@ -18,7 +28,7 @@
       <base-fab
         v-if="!menuButtonIsHidden"
         @click="openMenu"
-        class="bg-indigo-500 text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 focus-visible:bg-indigo-700 md:hidden"
+        class="bg-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 md:hidden"
         :class="menuPosition"
         title="Abrir menu"
         aria-label="Abrir menu"
@@ -41,6 +51,7 @@
 
     <teleport to="#app">
       <the-menu
+        v-if="!menuIsHidden"
         @close-menu="closeMenu"
         @save-settings="loadSettings"
         :menuIsOpen="menuIsOpen"
@@ -50,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import TheHeader from './components/layout/TheHeader.vue'
@@ -61,6 +72,14 @@ const store = useStore()
 const menuIsOpen = ref(false)
 const menuButtonIsHidden = ref(false)
 const menuPosition = ref('bottom-0 right-0 mb-3 mr-3')
+
+let menuTimeout
+
+const menuIsHidden = computed(() => {
+  menuTimeout = setTimeout(() => {
+    return menuIsOpen.value
+  }, 3000)
+})
 
 const openMenu = () => {
   menuIsOpen.value = true

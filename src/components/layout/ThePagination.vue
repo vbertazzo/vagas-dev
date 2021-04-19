@@ -1,9 +1,11 @@
 <template>
-  <nav class="flex items-center">
+  <nav class="flex items-center" aria-label="Paginação">
     <button
       @click="handlePageChange('back')"
       :disabled="isLoading || disabled || isFirstPage"
-      class="disabled:opacity-25"
+      :aria-disabled="isLoading || disabled || isFirstPage"
+      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none"
+      title="Página anterior"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -11,6 +13,7 @@
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path
           stroke-linecap="round"
@@ -19,12 +22,15 @@
           d="M15 19l-7-7 7-7"
         />
       </svg>
+      <span class="sr-only">Página anterior</span>
     </button>
     <p class="mx-2">Página {{ currentPage }} de {{ numberOfPages }}</p>
     <button
       @click="handlePageChange('next')"
       :disabled="isLoading || disabled || isLastPage"
-      class="disabled:opacity-25"
+      :aria-disabled="isLoading || disabled || isFirstPage"
+      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none"
+      title="Próxima página"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -32,6 +38,7 @@
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path
           stroke-linecap="round"
@@ -40,6 +47,7 @@
           d="M9 5l7 7-7 7"
         />
       </svg>
+      <span class="sr-only">Próxima página</span>
     </button>
   </nav>
 </template>

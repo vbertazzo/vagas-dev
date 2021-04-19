@@ -18,6 +18,11 @@ const app = createApp(App)
 app.use(router)
 app.use(store)
 app.use(Toast, { position: POSITION.BOTTOM_CENTER })
+app.directive('focus', {
+  mounted (el) {
+    el.focus()
+  }
+})
 app.component('vue-showdown', VueShowdown)
 app.component('base-chip', BaseChip)
 app.component('base-fab', BaseFAB)

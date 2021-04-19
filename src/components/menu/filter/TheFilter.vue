@@ -3,7 +3,7 @@
     <div>
       <label class="font-semibold" for="repository">Repositório</label>
       <select
-        class="w-full mt-2 text-indigo-700 border-gray-300 rounded-md focus:border-indigo-400 focus:ring-indigo-400 shadow-sm"
+        class="w-full mt-2 text-indigo-700 border-gray-00 rounded-md focus:border-indigo-400 focus:ring-indigo-400 shadow"
         id="repository"
         v-model="selectedRepository"
         @change="selectRepository"

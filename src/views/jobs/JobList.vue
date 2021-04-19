@@ -8,7 +8,7 @@
     >
       <job-item-shimmer v-for="_ in 10"></job-item-shimmer>
     </ul>
-    <ul
+    <div
       v-else-if="!error"
       class="w-full mb-4 space-y-2 flex flex-col items-center md:space-y-3"
     >
@@ -17,8 +17,9 @@
         :key="job.id"
         :job="job"
         :repository="selectedRepository"
+        title="Ver detalhes da vaga"
       ></job-item>
-    </ul>
+    </div>
     <the-pagination
       v-if="!error && jobs.length !== 0 && !isLoading"
     ></the-pagination>
@@ -43,7 +44,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, onUpdated, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useToast } from 'vue-toastification'
 
@@ -56,6 +57,10 @@ const toast = useToast()
 
 onBeforeMount(() => {
   getJobs()
+})
+
+onUpdated(() => {
+  moveFocustoTopOfPage()
 })
 
 const isLoading = ref(false)
@@ -94,6 +99,12 @@ const getJobs = async () => {
 
 const reloadPage = () => {
   window.location.reload()
+}
+
+const moveFocustoTopOfPage = () => {
+  document.body.setAttribute('tabindex', '-1')
+  document.body.focus()
+  document.body.removeAttribute('tabindex')
 }
 
 watch(selectedRepository, () => {

@@ -1,10 +1,16 @@
 <template>
   <svg
     class="w-4/5 mx-auto"
+    aria-describedby="notfound-title notfound-description"
+    role="img"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 1080 1080"
   >
+    <title id="notfound-title">Quebra-cabeça</title>
+    <desc id="notfound-description">
+      Um quebra-cabeça com uma peça faltando
+    </desc>
     <defs>
       <clipPath id="clip-path">
         <path

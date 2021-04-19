@@ -27,17 +27,18 @@
               <div class="flex justify-between items-center">
                 <label for="menu-left">Esquerda:</label>
                 <input
-                  class="w-6 h-6 text-indigo-500 border-indigo-500 focus:ring-indigo-400 shadow-sm"
+                  class="h-6 w-6 text-indigo-600 border-gray-400 focus:ring-indigo-500 shadow"
                   type="radio"
                   id="menu-left"
                   value="left"
                   v-model="menuButtonPosition"
+                  v-focus
                 />
               </div>
               <div class="flex justify-between items-center">
                 <label for="menu-right">Direita:</label>
                 <input
-                  class="w-6 h-6 text-indigo-500 border-indigo-500 focus:ring-indigo-400 shadow-sm"
+                  class="h-6 w-6 text-indigo-600 border-gray-400 focus:ring-indigo-500 shadow"
                   type="radio"
                   id="menu-right"
                   value="right"
@@ -65,20 +66,23 @@
 </template>
 
 <script setup>
-import { computed, defineProps, defineEmit, onMounted, ref } from 'vue'
+import { computed, defineProps, defineEmit, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import TheFilter from './filter/TheFilter.vue'
 
 const store = useStore()
 
-const menuButtonPosition = ref('right')
-const selectedRepository = computed(() => {
-  return store.getters['selectedRepository']
-})
-
 const props = defineProps({
   menuIsOpen: Boolean
+})
+
+const emit = defineEmit(['close-menu', 'save-settings'])
+
+const menuButtonPosition = ref('right')
+
+const selectedRepository = computed(() => {
+  return store.getters['selectedRepository']
 })
 
 const settings = {}
@@ -93,6 +97,4 @@ const saveSettings = () => {
 const handleRepositoryChange = newRepository => {
   settings.repository = newRepository
 }
-
-const emit = defineEmit(['close-menu', 'save-settings'])
 </script>
