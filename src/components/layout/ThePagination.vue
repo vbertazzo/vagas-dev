@@ -141,17 +141,9 @@ const moveScrollToTop = () => {
   window.scrollTo(0, 0)
 }
 
-const resetCurrentPage = () => {
-  store.dispatch('pagination/setCurrentPage', {
-    page: 1,
-    action: null
-  })
-}
-
 watch(selectedRepository, () => {
   checkFirstAndLastPages()
   moveScrollToTop()
-  resetCurrentPage()
 })
 
 watch(totalJobs, () => {

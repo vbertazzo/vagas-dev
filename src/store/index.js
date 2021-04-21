@@ -18,6 +18,14 @@ const store = createStore({
       context.commit('setLoading', { isLoading: payload.isLoading })
     },
     setSelectedRepository (context, payload) {
+      context.dispatch(
+        'pagination/setCurrentPage',
+        {
+          page: 1,
+          action: null
+        },
+        { root: true }
+      )
       context.commit('setSelectedRepository', payload)
     },
     setError (context, payload) {

@@ -81,7 +81,15 @@ module.exports = {
             'tbody tr': { borderBottomColor: theme('colors.gray.800') }
           }
         }
-      })
+      }),
+      screens: {
+        xs: '575px',
+        sm: '576px',
+        md: '898px',
+        lg: '1200px',
+        xl: '1159px',
+        xxl: '1359px'
+      }
     }
   },
   variants: {

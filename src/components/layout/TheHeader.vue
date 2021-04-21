@@ -1,8 +1,5 @@
 <template>
-  <header
-    id="header"
-    class="flex flex-col justify-center items-center dark:bg-gray-800"
-  >
+  <header class="flex flex-col justify-center items-center">
     <div class="mt-3 w-full flex justify-center items-center ">
       <router-link
         to="/"

@@ -1,9 +1,11 @@
 <template>
   <button
     @click="openJobDetails"
-    class="w-full px-4 py-2 border rounded-md flex flex-col shadow cursor-pointer transition-all transform focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none md:hover:shadow-md md:hover:-translate-y-0.5 md:hover:scale-105 md:hover:border-gray-300 md:flex-row dark:bg-gray-900 dark:border-indigo-400"
+    class="w-full px-4 py-2 border rounded-md flex flex-col shadow cursor-pointer transition-all transform focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none md:hover:shadow-md md:hover:-translate-y-0.5 md:hover:scale-105 md:hover:border-gray-300 md:flex-row dark:bg-gray-900 dark:border-indigo-400 sm:flex-row sm:items-center"
   >
-    <div class="w-10 h-10 flex-shrink-0 rounded-full overflow-hidden hidden">
+    <div
+      class="w-16 h-16 mr-4 flex-shrink-0 rounded-full overflow-hidden hidden sm:inline-block"
+    >
       <img
         :src="job?.user.avatar_url"
         :alt="job?.user.login"

@@ -3,7 +3,7 @@
     type="button"
     @click="openMenu"
     title=""
-    class="mt-2 ml-2 top-0 fixed z-10 w-px h-px overflow-hidden opacity-0 text-center bg-white text-indigo-700 focus:w-16 focus:h-auto focus:overflow-auto focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600"
+    class="mt-2 ml-2 top-0 fixed z-10 w-px h-px overflow-hidden opacity-0 text-center bg-white text-indigo-700 focus:w-16 focus:h-auto focus:overflow-auto focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 sm:focus:w-max"
   >
     Pular para o menu
   </button>
@@ -30,7 +30,7 @@
       <base-fab
         v-if="!menuButtonIsHidden"
         @click="openMenu"
-        class="bg-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 md:hidden dark:bg-white dark:text-indigo-900 dark:focus:ring-offset-indigo-900 dark:focus:ring-indigo-200"
+        class="bg-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 dark:bg-white dark:text-indigo-900 dark:focus:ring-offset-indigo-900 dark:focus:ring-indigo-200 md:hidden"
         :class="menuPosition"
         title="Abrir menu"
         aria-label="Abrir menu"

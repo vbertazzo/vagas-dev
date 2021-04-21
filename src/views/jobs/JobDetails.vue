@@ -1,7 +1,7 @@
 <template>
   <div class="mt-4 flex flex-col items-center p-2 px-4">
     <h1
-      class="text-xl font-bold leading-relaxed mb-2 text-gray-800 dark:text-indigo-50"
+      class="text-xl font-bold leading-relaxed mb-2 text-gray-800 dark:text-indigo-50 sm:text-2xl sm:mx-16"
     >
       {{ job?.title }}
     </h1>
@@ -35,7 +35,7 @@
     </div>
     <base-divider v-if="!isLoading && !error" class="mt-2"></base-divider>
     <div v-if="error" class="flex flex-col items-center">
-      <p class="text-lg leading-7">{{ error }}</p>
+      <p class="text-lg leading-7 dark:text-white">{{ error }}</p>
       <base-button
         @click="goBack"
         title="Voltar à página inicial"

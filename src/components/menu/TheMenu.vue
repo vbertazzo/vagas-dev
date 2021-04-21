@@ -12,7 +12,7 @@
     >
       <div
         v-if="menuIsOpen"
-        class="fixed z-20 top-0 right-0 bottom-0 w-2/3 py-4 border-l flex flex-col justify-center items-end bg-gray-100 dark:bg-gray-800 dark:border-indigo-400"
+        class="fixed z-20 top-0 right-0 bottom-0 w-9/12 py-4 border-l flex flex-col justify-center items-end bg-gray-100 dark:bg-gray-800 dark:border-indigo-400 sm:w-2/5"
       >
         <div
           class="w-11/12 mx-auto flex flex-col justify-center p-4 rounded-md bg-white shadow-md dark:bg-gray-900"

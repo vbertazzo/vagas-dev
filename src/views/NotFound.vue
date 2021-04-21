@@ -106,9 +106,13 @@
       </g>
     </g>
   </svg>
-  <div class="flex flex-col justify-center items-center">
-    <h3 class="font-semibold text-xl">Ops... Página não encontrada!</h3>
-    <p class="mt-2">Verifique se as informações estão corretas.</p>
+  <div class="px-4 flex flex-col justify-center items-center">
+    <h3 class="font-semibold text-lg text-center dark:text-white">
+      Ops... Página não encontrada!
+    </h3>
+    <p class="mt-2 mb-4 dark:text-white">
+      Verifique se as informações estão corretas.
+    </p>
     <base-button @click="goBack" title="Voltar à página inicial" text="Voltar">
     </base-button>
   </div>

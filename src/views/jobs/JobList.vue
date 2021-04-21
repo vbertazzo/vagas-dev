@@ -1,16 +1,16 @@
 <template>
   <section
-    class="w-11/12 max-w-lg my-4 mx-auto flex flex-col items-center justify-center"
+    class="w-11/12 max-w-lg my-4 mx-auto flex flex-col items-center justify-center sm:mt-8 sm:max-w-xl"
   >
     <ul
       v-if="isLoading && !error"
-      class="w-full mb-4 space-y-2 flex flex-col items-center md:space-y-3"
+      class="w-full mb-4 space-y-2 flex flex-col items-center sm:space-y-4"
     >
       <job-item-shimmer v-for="_ in 10"></job-item-shimmer>
     </ul>
     <div
       v-else-if="!error"
-      class="w-full mb-4 space-y-2 flex flex-col items-center md:space-y-3"
+      class="w-full mb-4 space-y-2 flex flex-col items-center sm:space-y-4"
     >
       <job-item
         v-for="job in jobs"
@@ -21,10 +21,11 @@
       ></job-item>
     </div>
     <the-pagination
+      class="sm:my-4"
       v-if="!error && jobs.length !== 0 && !isLoading"
     ></the-pagination>
     <div v-if="error && !isLoading" class="mt-4 flex flex-col items-center">
-      <p class="text-lg leading-7">
+      <p class="text-lg leading-7 dark:text-white">
         Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em
         breve.
       </p>
@@ -36,7 +37,7 @@
     </div>
     <p
       v-if="!error && jobs.length === 0 && !isLoading"
-      class="text-lg leading-7"
+      class="text-lg leading-7 dark:text-white"
     >
       Nenhuma vaga encontrada.
     </p>
