@@ -4,7 +4,7 @@
       @click="handlePageChange('back')"
       :disabled="isLoading || disabled || isFirstPage"
       :aria-disabled="isLoading || disabled || isFirstPage"
-      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none"
+      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none dark:text-indigo-300"
       title="Página anterior"
     >
       <svg
@@ -24,12 +24,14 @@
       </svg>
       <span class="sr-only">Página anterior</span>
     </button>
-    <p class="mx-2">Página {{ currentPage }} de {{ numberOfPages }}</p>
+    <p class="mx-2 dark:text-indigo-200">
+      Página {{ currentPage }} de {{ numberOfPages }}
+    </p>
     <button
       @click="handlePageChange('next')"
       :disabled="isLoading || disabled || isLastPage"
       :aria-disabled="isLoading || disabled || isFirstPage"
-      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none"
+      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none dark:text-indigo-300"
       title="Próxima página"
     >
       <svg

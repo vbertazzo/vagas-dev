@@ -3,7 +3,7 @@
     <div
       v-if="menuIsOpen"
       @click="$emit('close-menu')"
-      class="fixed top-0 left-0 h-screen w-full z-10 cursor-pointer bg-transparent"
+      class="fixed top-0 left-0 h-screen w-full z-10 cursor-pointer bg-gray-900 bg-opacity-70"
     ></div>
     <transition
       name="slide"
@@ -12,19 +12,21 @@
     >
       <div
         v-if="menuIsOpen"
-        class="fixed z-20 top-0 right-0 bottom-0 w-2/3 py-4 border-l flex flex-col justify-center items-end bg-gray-100"
+        class="fixed z-20 top-0 right-0 bottom-0 w-2/3 py-4 border-l flex flex-col justify-center items-end bg-gray-100 dark:bg-gray-800 dark:border-indigo-400"
       >
         <div
-          class="w-11/12 mx-auto flex flex-col justify-center p-4 rounded-md bg-white shadow-md"
+          class="w-11/12 mx-auto flex flex-col justify-center p-4 rounded-md bg-white shadow-md dark:bg-gray-900"
         >
-          <h2 class="font-bold text-lg text-center">Menu</h2>
+          <h2 class="font-bold text-lg text-center dark:text-white">Menu</h2>
 
-          <div class="my-4 w-11/12 border-b"></div>
+          <base-divider />
 
           <div>
-            <p class="font-semibold">Posição do botão de menu</p>
+            <p class="font-semibold dark:text-white">
+              Posição do botão de menu
+            </p>
             <div class="mt-2 w-7/12 flex flex-col space-y-3">
-              <div class="flex justify-between items-center">
+              <div class="flex justify-between items-center dark:text-white">
                 <label for="menu-left">Esquerda:</label>
                 <input
                   class="h-6 w-6 text-indigo-600 border-gray-400 focus:ring-indigo-500 shadow"
@@ -35,7 +37,7 @@
                   v-focus
                 />
               </div>
-              <div class="flex justify-between items-center">
+              <div class="flex justify-between items-center dark:text-white">
                 <label for="menu-right">Direita:</label>
                 <input
                   class="h-6 w-6 text-indigo-600 border-gray-400 focus:ring-indigo-500 shadow"
@@ -48,11 +50,15 @@
             </div>
           </div>
 
-          <div class="my-4 w-11/12 border-b"></div>
+          <base-divider />
+
+          <the-switch></the-switch>
+
+          <base-divider />
 
           <the-filter @select-repository="handleRepositoryChange"></the-filter>
 
-          <div class="mt-4 w-11/12 border-b"></div>
+          <base-divider />
 
           <base-button
             @click="saveSettings"
@@ -70,6 +76,7 @@ import { computed, defineProps, defineEmit, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import TheFilter from './filter/TheFilter.vue'
+import TheSwitch from './TheSwitch.vue'
 
 const store = useStore()
 

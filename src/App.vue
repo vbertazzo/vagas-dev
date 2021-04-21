@@ -8,7 +8,9 @@
     Pular para o menu
   </button>
 
-  <div class="relative flex flex-col min-h-screen overflow-hidden">
+  <div
+    class="relative flex flex-col min-h-screen overflow-hidden dark:bg-gray-800"
+  >
     <the-header></the-header>
 
     <router-view v-slot="{ Component }">
@@ -28,7 +30,7 @@
       <base-fab
         v-if="!menuButtonIsHidden"
         @click="openMenu"
-        class="bg-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 md:hidden"
+        class="bg-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 md:hidden dark:bg-white dark:text-indigo-900 dark:focus:ring-offset-indigo-900 dark:focus:ring-indigo-200"
         :class="menuPosition"
         title="Abrir menu"
         aria-label="Abrir menu"
@@ -61,7 +63,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 
 import TheHeader from './components/layout/TheHeader.vue'
@@ -72,6 +74,10 @@ const store = useStore()
 const menuIsOpen = ref(false)
 const menuButtonIsHidden = ref(false)
 const menuPosition = ref('bottom-0 right-0 mb-3 mr-3')
+
+onMounted(() => {
+  store.dispatch('loadDarkMode')
+})
 
 let menuTimeout
 

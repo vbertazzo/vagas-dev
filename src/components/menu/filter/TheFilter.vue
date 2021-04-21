@@ -1,9 +1,11 @@
 <template>
   <div>
     <div>
-      <label class="font-semibold" for="repository">Repositório</label>
+      <label class="font-semibold dark:text-white" for="repository"
+        >Repositório</label
+      >
       <select
-        class="w-full mt-2 text-indigo-700 border-gray-00 rounded-md focus:border-indigo-400 focus:ring-indigo-400 shadow"
+        class="w-full mt-2 text-indigo-700 border-gray-00 rounded-md focus:border-indigo-400 focus:ring-indigo-400 shadow dark:bg-indigo-800 dark:text-white"
         id="repository"
         v-model="selectedRepository"
         @change="selectRepository"

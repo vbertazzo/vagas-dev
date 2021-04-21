@@ -9,7 +9,8 @@ const store = createStore({
     return {
       isLoading: false,
       selectedRepository: 'FrontendBR',
-      error: null
+      error: null,
+      darkMode: false
     }
   },
   actions: {
@@ -22,8 +23,28 @@ const store = createStore({
     setError (context, payload) {
       context.commit('setError', payload)
     },
-    dismissError (context) {
-      context.commit('dismissError')
+    loadDarkMode (context) {
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('theme', 'dark')
+        context.commit('setDarkMode', true)
+      } else {
+        document.documentElement.classList.remove('dark')
+        localStorage.setItem('theme', 'light')
+        context.commit('setDarkMode', false)
+      }
+    },
+    setDarkMode (context, payload) {
+      const isDarkModeSelected = payload
+
+      localStorage.setItem('theme', isDarkModeSelected ? 'dark' : 'light')
+      context.commit('setDarkMode', isDarkModeSelected)
+
+      context.dispatch('loadDarkMode')
     }
   },
   getters: {
@@ -35,6 +56,9 @@ const store = createStore({
     },
     error (state) {
       return state.error
+    },
+    darkMode (state) {
+      return state.darkMode
     }
   },
   mutations: {
@@ -47,8 +71,8 @@ const store = createStore({
     setError (state, payload) {
       state.error = payload
     },
-    dismissError (state) {
-      state.error = null
+    setDarkMode (state, payload) {
+      state.darkMode = payload
     }
   }
 })
