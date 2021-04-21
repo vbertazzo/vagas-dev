@@ -73,6 +73,10 @@ const selectedRepository = computed(() => {
   return store.getters['selectedRepository']
 })
 
+const currentPage = computed(() => {
+  return store.getters['pagination/currentPage']
+})
+
 const jobs = computed(() => {
   return store.getters['jobs/paginatedJobs']
 })
@@ -88,7 +92,7 @@ const getJobs = async () => {
 
     store.dispatch('jobs/loadPaginatedJobs', {
       repository: selectedRepository.value,
-      page: 1
+      page: currentPage.value
     })
 
     isLoading.value = false
