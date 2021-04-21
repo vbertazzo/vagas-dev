@@ -12,9 +12,13 @@ exports.handler = async function (event, context) {
     'AndroidDevBr',
     'Backend-BR',
     'CocoaHeadsBrasil',
+    'DotNetDevBR',
     'FrontendBR',
+    'FlutterBR',
     'Gommunity',
     'PHPDevBR',
+    'QA-Brasil',
+    'React-Brasil',
     'UXBrasil',
     'Vuejs-BR'
   ]

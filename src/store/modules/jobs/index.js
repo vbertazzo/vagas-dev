@@ -28,7 +28,21 @@ export default {
           retrievedPages: null,
           totalJobs: null
         },
+        DotNetDevBR: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null,
+          totalJobs: null
+        },
         FrontendBR: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null,
+          totalJobs: null
+        },
+        FlutterBR: {
           jobs: [],
           labels: [],
           lastFetched: null,
@@ -43,6 +57,20 @@ export default {
           totalJobs: null
         },
         PHPDevBR: {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null,
+          totalJobs: null
+        },
+        'QA-Brasil': {
+          jobs: [],
+          labels: [],
+          lastFetched: null,
+          retrievedPages: null,
+          totalJobs: null
+        },
+        'React-Brasil': {
           jobs: [],
           labels: [],
           lastFetched: null,

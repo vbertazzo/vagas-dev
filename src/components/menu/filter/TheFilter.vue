@@ -34,9 +34,13 @@ const repositories = [
   'AndroidDevBr',
   'Backend-BR',
   'CocoaHeadsBrasil',
+  'DotNetDevBR',
   'FrontendBR',
+  'FlutterBR',
   'Gommunity',
   'PHPDevBR',
+  'QA-Brasil',
+  'React-Brasil',
   'UXBrasil',
   'Vuejs-BR'
 ]
