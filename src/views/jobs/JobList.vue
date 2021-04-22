@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-11/12 max-w-lg my-4 mx-auto flex flex-col items-center justify-center sm:mt-8 sm:max-w-xl"
+    class="w-11/12 max-w-lg my-4 mx-auto flex flex-col items-center justify-center sm:mt-8 sm:max-w-xl lg:max-w-2xl"
   >
     <ul
       v-if="isLoading && !error"
@@ -24,8 +24,8 @@
       class="sm:my-4"
       v-if="!error && jobs.length !== 0 && !isLoading"
     ></the-pagination>
-    <div v-if="error && !isLoading" class="mt-4 flex flex-col items-center">
-      <p class="text-lg leading-7 dark:text-white">
+    <div v-if="error && !isLoading" class="flex flex-col items-center mt-10">
+      <p class="text-lg leading-7 dark:text-white mb-10 lg:text-xl">
         Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em
         breve.
       </p>
@@ -49,7 +49,7 @@ import { computed, onBeforeMount, onUpdated, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useToast } from 'vue-toastification'
 
-import JobItem from './JobItem.vue'
+import JobItem from '../../components/jobs/JobItem.vue'
 import JobItemShimmer from '../../components/jobs/JobItemShimmer.vue'
 import ThePagination from '../../components/layout/ThePagination.vue'
 

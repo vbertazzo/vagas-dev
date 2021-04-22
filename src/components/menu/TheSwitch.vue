@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-between items-center">
-    <h2 class="dark:text-white">Modo Escuro:</h2>
+  <div class="px-4 flex justify-between items-center">
+    <h2 class="dark:text-white lg:text-lg">Tema Escuro:</h2>
     <div
       @click="handleSwitchChange"
       @keydown.space="handleSwitchChange"

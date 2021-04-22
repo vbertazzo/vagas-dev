@@ -83,27 +83,27 @@ module.exports = {
         }
       }),
       screens: {
-        xs: '575px',
         sm: '576px',
         md: '898px',
-        lg: '1200px',
-        xl: '1159px',
-        xxl: '1359px'
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px'
       }
     }
   },
   variants: {
     extend: {
-      typography: ['dark'],
       animation: ['motion-reduce'],
+      backgroundColor: ['focus-visible'],
+      height: ['focus'],
       opacity: ['disabled', 'focus-visible'],
       ringColor: ['group-focus'],
       ringWidth: ['group-focus'],
       ringOffsetWidth: ['group-focus'],
       ringOffsetColor: ['group-focus'],
-      backgroundColor: ['focus-visible'],
-      width: ['focus'],
-      height: ['focus']
+      transform: ['motion-reduce'],
+      typography: ['dark'],
+      width: ['focus']
     }
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')]

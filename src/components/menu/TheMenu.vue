@@ -3,6 +3,7 @@
     <div
       v-if="menuIsOpen"
       @click="$emit('close-menu')"
+      title="Clique para fechar o menu"
       class="fixed top-0 left-0 h-screen w-full z-10 cursor-pointer bg-gray-900 bg-opacity-70"
     ></div>
     <transition
@@ -12,16 +13,18 @@
     >
       <div
         v-if="menuIsOpen"
-        class="fixed z-20 top-0 right-0 bottom-0 w-9/12 py-4 border-l flex flex-col justify-center items-end bg-gray-100 dark:bg-gray-800 dark:border-indigo-400 sm:w-2/5"
+        class="fixed z-20 top-0 right-0 bottom-0 w-10/12 py-4 border-l flex flex-col justify-center items-end bg-gray-100 dark:bg-gray-800 dark:border-indigo-400 sm:w-max"
       >
         <div
           class="w-11/12 mx-auto flex flex-col justify-center p-4 rounded-md bg-white shadow-md dark:bg-gray-900"
         >
-          <h2 class="font-bold text-lg text-center dark:text-white">Menu</h2>
+          <h2 class="font-bold text-lg text-center dark:text-white lg:text-2xl">
+            Menu
+          </h2>
 
           <base-divider />
 
-          <div>
+          <div class="px-4 md:hidden">
             <p class="font-semibold dark:text-white">
               Posição do botão de menu
             </p>
@@ -50,7 +53,7 @@
             </div>
           </div>
 
-          <base-divider />
+          <base-divider class="md:hidden" />
 
           <the-switch></the-switch>
 

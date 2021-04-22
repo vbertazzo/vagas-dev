@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-4 flex flex-col items-center p-2 px-4">
+  <div class="flex flex-col items-center py-2 px-4">
     <h1
-      class="text-xl font-bold leading-relaxed mb-2 text-gray-800 dark:text-indigo-50 sm:text-2xl sm:mx-16"
+      class="text-xl font-bold leading-relaxed mt-2 text-gray-800 dark:text-indigo-50 sm:text-2xl sm:mx-16 sm:mb-4 sm:mt-6 lg:text-3xl lg:mt-12 lg:mb-10"
     >
       {{ job?.title }}
     </h1>
@@ -33,9 +33,11 @@
         ></path>
       </svg>
     </div>
-    <base-divider v-if="!isLoading && !error" class="mt-2"></base-divider>
-    <div v-if="error" class="flex flex-col items-center">
-      <p class="text-lg leading-7 dark:text-white">{{ error }}</p>
+    <base-divider v-if="!isLoading && !error"></base-divider>
+    <div v-if="error" class="flex flex-col items-center mt-10">
+      <p class="text-lg leading-7 dark:text-white mb-10 lg:text-xl">
+        {{ error }}
+      </p>
       <base-button
         @click="goBack"
         title="Voltar à página inicial"
@@ -43,20 +45,20 @@
       ></base-button>
     </div>
     <vue-showdown
-      class="w-full prose prose-sm prose-indigo dark:prose-dark"
+      class="w-full prose prose-sm prose-indigo dark:prose-dark lg:prose-lg lg:mt-10"
       :markdown="job?.body"
       flavor="github"
       :extensions="[removeLineCarriages, removeTags]"
     />
     <a
       v-if="!isLoading && !error"
-      class="group my-6 p-2 text-sm flex flex-col items-center justify-center focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-500 focus:outline-none"
+      class="group my-6 p-2 text-sm flex flex-col items-center justify-center focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-500 focus:outline-none lg:mt-10"
       :href="job?.html_url"
       title="Abrir em GitHub"
     >
       <svg
         fill="none"
-        class="h-8 w-8 group-hover:text-indigo-600 dark:text-indigo-200"
+        class="h-8 w-8 group-hover:text-indigo-600 dark:text-indigo-200 dark:group-hover:text-indigo-500 lg:h-12 lg:w-12"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         stroke="currentColor"
@@ -66,7 +68,9 @@
           d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
         />
       </svg>
-      <p class="text-sm group-hover:text-indigo-600 dark:text-indigo-200">
+      <p
+        class="text-sm group-hover:text-indigo-600 dark:text-indigo-200 dark:group-hover:text-indigo-500 lg:text-base"
+      >
         Abrir em GitHub
       </p>
     </a>

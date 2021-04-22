@@ -3,7 +3,7 @@
     type="button"
     @click="openMenu"
     title=""
-    class="mt-2 ml-2 top-0 fixed z-10 w-px h-px overflow-hidden opacity-0 text-center bg-white text-indigo-700 focus:w-16 focus:h-auto focus:overflow-auto focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 sm:focus:w-max"
+    class="mt-2 ml-2 top-0 fixed z-10 w-px h-px overflow-hidden opacity-0 text-center bg-white text-indigo-700 focus:w-16 focus:h-auto focus:overflow-auto focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 sm:focus:w-max lg:right-1/2 lg:transform lg:translate-x-1/2"
   >
     Pular para o menu
   </button>
@@ -11,7 +11,7 @@
   <div
     class="relative flex flex-col min-h-screen overflow-hidden dark:bg-gray-800"
   >
-    <the-header></the-header>
+    <the-header @open-menu="openMenu"></the-header>
 
     <router-view v-slot="{ Component }">
       <component
@@ -73,7 +73,7 @@ const store = useStore()
 
 const menuIsOpen = ref(false)
 const menuButtonIsHidden = ref(false)
-const menuPosition = ref('bottom-0 right-0 mb-3 mr-3')
+const menuPosition = ref('bottom-0 right-0 mb-3 mr-3 sm:mb-5 sm:mr-5')
 
 onMounted(() => {
   store.dispatch('loadDarkMode')
@@ -95,7 +95,7 @@ const openMenu = () => {
 
 const closeMenu = () => {
   menuIsOpen.value = false
-  document.documentElement.style.overflow = 'scroll'
+  document.documentElement.style.overflow = 'auto'
   document.body.scroll = 'yes'
 }
 
@@ -108,8 +108,8 @@ const showMenuButton = () => {
 }
 
 const changeMenuButtonPosition = position => {
-  const right = 'bottom-0 right-0 mb-3 mr-3'
-  const left = 'bottom-0 left-0 mb-3 ml-3'
+  const right = 'bottom-0 right-0 mb-3 mr-3 sm:mb-5 sm:mr-5'
+  const left = 'bottom-0 left-0 mb-3 ml-3 sm:mb-5 sm:ml-5'
   menuPosition.value = position === 'right' ? right : left
 }
 

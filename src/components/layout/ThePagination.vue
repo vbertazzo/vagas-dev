@@ -4,12 +4,14 @@
       @click="handlePageChange('back')"
       :disabled="isLoading || disabled || isFirstPage"
       :aria-disabled="isLoading || disabled || isFirstPage"
-      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none dark:text-indigo-300"
+      :class="
+        isLoading || disabled || isFirstPage ? 'btn-disabled' : 'btn-enabled'
+      "
       title="Página anterior"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8"
+        class="h-8 w-8 md:h-10 md:w-10"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -24,19 +26,21 @@
       </svg>
       <span class="sr-only">Página anterior</span>
     </button>
-    <p class="mx-2 dark:text-indigo-200">
+    <p class="mx-2 dark:text-indigo-200 sm:mx-4 md:text-lg">
       Página {{ currentPage }} de {{ numberOfPages }}
     </p>
     <button
       @click="handlePageChange('next')"
       :disabled="isLoading || disabled || isLastPage"
-      :aria-disabled="isLoading || disabled || isFirstPage"
-      class="disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none dark:text-indigo-300"
+      :aria-disabled="isLoading || disabled || isLastPage"
+      :class="
+        isLoading || disabled || isLastPage ? 'btn-disabled' : 'btn-enabled'
+      "
       title="Próxima página"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8"
+        class="h-8 w-8 md:h-10 md:w-10"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -150,3 +154,13 @@ watch(totalJobs, () => {
   loadNumberOfPages()
 })
 </script>
+
+<style scoped>
+.btn-enabled {
+  @apply border-2 border-indigo-700 text-indigo-700 md:hover:text-indigo-50 md:hover:bg-indigo-500 md:hover:border-transparent rounded-md focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none dark:text-indigo-300 dark:border-indigo-300 md:dark:hover:text-indigo-800 md:dark:hover:bg-indigo-300 transition-colors duration-200;
+}
+
+.btn-disabled {
+  @apply cursor-not-allowed text-indigo-700 disabled:opacity-25 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none dark:text-indigo-100 transition-colors duration-200;
+}
+</style>
