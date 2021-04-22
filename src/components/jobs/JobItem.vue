@@ -5,10 +5,11 @@
   >
     <div
       class="w-16 h-16 mr-4 border shadow-sm flex-shrink-0 rounded-full overflow-hidden hidden sm:inline-block lg:w-20 lg:h-20 lg:mr-6"
+      aria-hidden="true"
     >
       <img
         :src="job?.user.avatar_url"
-        :alt="job?.user.login"
+        :alt="`Perfil de ${job?.user.login}`"
         class="object-cover object-center w-full h-full"
       />
     </div>

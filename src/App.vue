@@ -22,6 +22,10 @@
       ></component>
     </router-view>
 
+    <base-divider></base-divider>
+
+    <the-footer></the-footer>
+
     <transition
       name="bounce"
       enter-active-class="animate__animated animate__bounceIn"
@@ -68,6 +72,7 @@ import { useStore } from 'vuex'
 
 import TheHeader from './components/layout/TheHeader.vue'
 import TheMenu from './components/menu/TheMenu.vue'
+import TheFooter from './components/layout/TheFooter.vue'
 
 const store = useStore()
 
