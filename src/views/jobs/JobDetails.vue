@@ -81,6 +81,7 @@
 import { computed, defineProps, onBeforeMount, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import api from '../../services/api.js'
 
 const store = useStore()
 const router = useRouter()
@@ -113,20 +114,8 @@ const fetchJob = async () => {
   const { repository, jobNumber } = props
   isLoading.value = true
   try {
-    const url = `http://localhost:8888/.netlify/functions/jobByNumber?repository=${repository}&jobNumber=${jobNumber}`
-    const response = await fetch(url)
+    const data = await api.fetchJobByNumber(repository, jobNumber)
 
-    if (!response.ok) {
-      let message =
-        'Ocorreu um erro ao carregar a vaga. Por favor, tente novamente em breve.'
-      if (response.status === 404) {
-        message =
-          'Vaga não encontrada. Por favor, verifique se as informações estão corretas.'
-      }
-      throw new Error(message)
-    }
-
-    const data = await response.json()
     isLoading.value = false
 
     return data

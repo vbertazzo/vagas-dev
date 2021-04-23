@@ -1,3 +1,5 @@
+import api from '../../../services/api.js'
+
 export default {
   async loadJobs (context, payload) {
     const API_PER_PAGE = 100
@@ -16,25 +18,18 @@ export default {
       context.dispatch('fetchTotalJobs', { repository })
     }
 
-    const response = await fetch(
-      `.netlify/functions/jobs?repository=${repository}&perPage=${API_PER_PAGE}&page=${page}`
-    )
+    try {
+      const data = await api.fetchJobs(repository, API_PER_PAGE, page)
 
-    if (!response.ok) {
-      const error = new Error(
-        'Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em breve.'
-      )
+      context.commit('loadJobs', { repository, jobs: data })
+      context.commit('setLastFetched', { repository })
+      context.commit('setRetrievedPages', {
+        repository,
+        amount: page
+      })
+    } catch (error) {
       context.dispatch('setError', { error }, { root: true })
     }
-
-    const responseData = await response.json()
-
-    context.commit('loadJobs', { repository, jobs: responseData })
-    context.commit('setLastFetched', { repository })
-    context.commit('setRetrievedPages', {
-      repository,
-      amount: page
-    })
 
     context.dispatch('setLoading', { isLoading: false }, { root: true })
   },
@@ -84,20 +79,14 @@ export default {
     const { repository } = payload
 
     context.dispatch('setLoading', { isLoading: true }, { root: true })
-    const response = await fetch(
-      `.netlify/functions/totalJobs?repository=${repository}`
-    )
 
-    if (!response.ok) {
-      const error = new Error(
-        'Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em breve.'
-      )
+    try {
+      const { jobs } = await api.fetchTotalJobs(repository)
+      context.commit('setTotalJobs', { repository, totalJobs: jobs })
+    } catch (error) {
       context.dispatch('setError', { error }, { root: true })
     }
 
-    const { jobs } = await response.json()
-
-    context.commit('setTotalJobs', { repository, totalJobs: jobs })
     context.dispatch('setLoading', { isLoading: false }, { root: true })
   }
 }

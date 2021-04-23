@@ -24,7 +24,7 @@
       class="sm:my-4"
       v-if="!error && jobs.length !== 0 && !isLoading"
     ></the-pagination>
-    <div v-if="error && !isLoading" class="flex flex-col items-center mt-10">
+    <div v-if="error && !isLoading" class="flex flex-col items-center my-10">
       <p class="text-lg leading-7 dark:text-white mb-10 lg:text-xl">
         Ocorreu um erro ao carregar as vagas. Por favor, tente novamente em
         breve.
@@ -37,7 +37,7 @@
     </div>
     <p
       v-if="!error && jobs.length === 0 && !isLoading"
-      class="text-lg leading-7 dark:text-white"
+      class="text-lg leading-7 dark:text-white mb-10 lg:text-xl"
     >
       Nenhuma vaga encontrada.
     </p>
