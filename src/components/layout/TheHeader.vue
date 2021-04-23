@@ -8,7 +8,8 @@
         class="focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-indigo-600 focus:outline-none"
       >
         <h1
-          class="text-2xl font-bold uppercase text-indigo-700 dark:text-indigo-300"
+          class="text-2xl font-bold uppercase text-indigo-700 hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-white"
+          title="Home"
           aria-hidden="true"
         >
           {{ '<vagas dev />' }}

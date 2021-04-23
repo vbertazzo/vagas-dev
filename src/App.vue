@@ -9,7 +9,7 @@
   </button>
 
   <div
-    class="relative flex flex-col min-h-screen overflow-hidden dark:bg-gray-800"
+    class="relative flex flex-col justify-between min-h-screen overflow-hidden dark:bg-gray-800"
   >
     <the-header @open-menu="openMenu"></the-header>
 
@@ -21,8 +21,6 @@
         :is="Component"
       ></component>
     </router-view>
-
-    <base-divider></base-divider>
 
     <the-footer></the-footer>
 

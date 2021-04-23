@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-11/12 max-w-lg mt-4 mx-auto flex flex-col items-center justify-center sm:mt-8 sm:max-w-xl lg:max-w-2xl"
+    class="w-11/12 max-w-lg mt-4 mx-auto flex flex-col items-center justify-center sm:mt-8 sm:max-w-xl lg:max-w-2xl 2xl:max-w-3xl"
   >
     <ul
       v-if="isLoading && !error"
