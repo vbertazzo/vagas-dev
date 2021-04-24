@@ -10,8 +10,8 @@
 
 	<div
 		class="relative flex flex-col justify-between min-h-screen overflow-hidden dark:bg-gray-800"
-		@touchmove="hideMenuButton"
-		@touchend="showMenuButton"
+		@touchmove.passive="hideMenuButton"
+		@touchend.passive="showMenuButton"
 	>
 		<the-header @open-menu="openMenu"></the-header>
 
