@@ -1,92 +1,89 @@
 import api from '../../../services/api.js'
 
 export default {
-  async loadJobs (context, payload) {
-    const API_PER_PAGE = 100
+	async loadJobs (context, payload) {
+		const API_PER_PAGE = 100
 
-    const { repository, page } = payload
+		const { repository, page } = payload
 
-    const { retrievedPages, totalJobs } = context.state.jobs[repository]
+		const apiPage = convertInternalPageToApiPage(page)
 
-    if (retrievedPages >= page) {
-      return
-    }
+		if (context.state.jobs[repository].jobs[apiPage]) {
+			return
+		}
 
-    context.dispatch('setLoading', { isLoading: true }, { root: true })
+		context.dispatch('setLoading', { isLoading: true }, { root: true })
 
-    if (!totalJobs) {
-      context.dispatch('fetchTotalJobs', { repository })
-    }
+		const { totalJobs } = context.state.jobs[repository]
 
-    try {
-      const data = await api.fetchJobs(repository, API_PER_PAGE, page)
+		if (!totalJobs) {
+			context.dispatch('fetchTotalJobs', { repository })
+		}
 
-      context.commit('loadJobs', { repository, jobs: data })
-      context.commit('setLastFetched', { repository })
-      context.commit('setRetrievedPages', {
-        repository,
-        amount: page
-      })
-    } catch (error) {
-      context.dispatch('setError', { error }, { root: true })
-    }
+		try {
+			const data = await api.fetchJobs(repository, API_PER_PAGE, apiPage)
 
-    context.dispatch('setLoading', { isLoading: false }, { root: true })
-  },
+			context.commit('loadJobs', { repository, jobs: data, section: apiPage })
+		} catch (error) {
+			context.dispatch('setError', { error }, { root: true })
+		}
 
-  loadPaginatedJobs (context, payload) {
-    const PER_PAGE = 10
-    const API_PER_PAGE = 100
-    const UPDATE_THRESHOLD = 80
+		context.dispatch('setLoading', { isLoading: false }, { root: true })
+	},
 
-    const { repository, page, action } = payload
+	loadPaginatedJobs (context, payload) {
+		const PER_PAGE = 10
 
-    const jobs = context.state.jobs[repository].jobs
-    const updateThreshold = jobs.length - (API_PER_PAGE - UPDATE_THRESHOLD)
+		const { repository, page, action } = payload
 
-    const isLastPage = jobs.length % PER_PAGE !== 0
-    const startingIndex = page === 1 ? 0 : page * PER_PAGE - PER_PAGE
-    const endingIndex = page * PER_PAGE
+		const section = convertInternalPageToApiPage(page)
+		const jobs = context.state.jobs[repository].jobs[section]
 
-    const paginatedJobs = jobs.slice(startingIndex, endingIndex)
+		const pageRange = getPageRange(page)
+		const startingIndex = pageRange === 1 ? 0 : pageRange * PER_PAGE - PER_PAGE
+		const endingIndex = pageRange * PER_PAGE
+		const paginatedJobs = jobs.slice(startingIndex, endingIndex)
 
-    context.commit('setPaginatedJobs', { paginatedJobs })
+		context.commit('setPaginatedJobs', { paginatedJobs })
 
-    const currentProgress = page * PER_PAGE
+		const shouldFetchMoreJobs = jobs.length === 0
 
-    if (action === 'back') {
-      return
-    }
+		if (shouldFetchMoreJobs) {
+			const nextPage = action === 'back' ? page - 1 : page + 1
 
-    const shouldFetchMoreJobs = currentProgress >= updateThreshold
+			context.dispatch('loadJobs', {
+				repository,
+				page: nextPage
+			})
+		}
+	},
 
-    if (shouldFetchMoreJobs && !isLastPage) {
-      const lastRetrievedPage = context.state.jobs[repository].retrievedPages
-      const nextPage = Math.trunc(Math.ceil(jobs.length / API_PER_PAGE) + 1)
+	async fetchTotalJobs (context, payload) {
+		const { repository } = payload
 
-      if (lastRetrievedPage >= nextPage) {
-        return
-      }
+		context.dispatch('setLoading', { isLoading: true }, { root: true })
 
-      context.dispatch('loadJobs', {
-        repository,
-        page: nextPage
-      })
-    }
-  },
+		try {
+			const { jobs } = await api.fetchTotalJobs(repository)
+			context.commit('setTotalJobs', { repository, totalJobs: jobs })
+		} catch (error) {
+			context.dispatch('setError', { error }, { root: true })
+		}
 
-  async fetchTotalJobs (context, payload) {
-    const { repository } = payload
+		context.dispatch('setLoading', { isLoading: false }, { root: true })
+	}
+}
 
-    context.dispatch('setLoading', { isLoading: true }, { root: true })
+const convertInternalPageToApiPage = page => {
+	if (page % 10 === 0) {
+		return +`${page / 10}`.split('.')[0]
+	}
+	return +`${page / 10 + 1}`.split('.')[0]
+}
 
-    try {
-      const { jobs } = await api.fetchTotalJobs(repository)
-      context.commit('setTotalJobs', { repository, totalJobs: jobs })
-    } catch (error) {
-      context.dispatch('setError', { error }, { root: true })
-    }
-
-    context.dispatch('setLoading', { isLoading: false }, { root: true })
-  }
+const getPageRange = page => {
+	if (page % 10 === 0) {
+		return 10
+	}
+	return +`${page / 10}`.split('.')[1]
 }

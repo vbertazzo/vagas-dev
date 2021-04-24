@@ -3,99 +3,63 @@ import getters from './getters'
 import mutations from './mutations'
 
 export default {
-  namespaced: true,
-  state () {
-    return {
-      jobs: {
-        AndroidDevBr: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        'Backend-BR': {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        CocoaHeadsBrasil: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        DotNetDevBR: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        FrontendBR: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        FlutterBR: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        Gommunity: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        PHPDevBR: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        'QA-Brasil': {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        'React-Brasil': {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        UXBrasil: {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        },
-        'Vuejs-BR': {
-          jobs: [],
-          labels: [],
-          lastFetched: null,
-          retrievedPages: null,
-          totalJobs: null
-        }
-      },
-      paginatedJobs: []
-    }
-  },
-  actions,
-  getters,
-  mutations
+	namespaced: true,
+	state () {
+		return {
+			jobs: {
+				AndroidDevBr: {
+					jobs: {},
+					totalJobs: null
+				},
+				'Backend-BR': {
+					jobs: {},
+					totalJobs: null
+				},
+				CocoaHeadsBrasil: {
+					jobs: {},
+					totalJobs: null
+				},
+				DotNetDevBR: {
+					jobs: {},
+					totalJobs: null
+				},
+				FrontendBR: {
+					jobs: {},
+					totalJobs: null
+				},
+				FlutterBR: {
+					jobs: {},
+					totalJobs: null
+				},
+				Gommunity: {
+					jobs: {},
+					totalJobs: null
+				},
+				PHPDevBR: {
+					jobs: {},
+					totalJobs: null
+				},
+				'QA-Brasil': {
+					jobs: {},
+					totalJobs: null
+				},
+				'React-Brasil': {
+					jobs: {},
+					totalJobs: null
+				},
+				UXBrasil: {
+					jobs: {},
+					totalJobs: null
+				},
+				'Vuejs-BR': {
+					jobs: {},
+					totalJobs: null
+				}
+			},
+			paginatedJobs: []
+		}
+	},
+	actions,
+	getters,
+	mutations
 }

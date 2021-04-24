@@ -64,12 +64,14 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 import TheHeader from './components/layout/TheHeader.vue'
 import TheMenu from './components/menu/TheMenu.vue'
 import TheFooter from './components/layout/TheFooter.vue'
 
 const store = useStore()
+const router = useRouter()
 
 const menuIsOpen = ref(false)
 const menuButtonIsHidden = ref(false)
@@ -118,6 +120,7 @@ const loadSettings = settings => {
 
 	if (repository) {
 		store.dispatch('setSelectedRepository', repository)
+		router.push(`/vagas/${repository}?page=1`)
 	}
 
 	changeMenuButtonPosition(menuButtonPosition)

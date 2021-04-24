@@ -107,7 +107,12 @@ const jobs = computed(() => {
 })
 
 const findJob = computed(() => {
-	return jobs.value.find(job => job.number === +props.jobNumber)
+	const allJobs = []
+	for (const section in jobs.value) {
+		allJobs.push(jobs.value[section])
+	}
+
+	return allJobs.flat().find(job => job.number === +props.jobNumber)
 })
 
 const fetchJob = async () => {
