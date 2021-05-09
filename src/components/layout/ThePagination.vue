@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { computed, onUnmounted, onMounted, ref, watch } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -71,11 +71,6 @@ let timeout = null
 
 onUnmounted(() => {
 	clearTimeout(timeout)
-})
-
-onMounted(() => {
-	loadNumberOfPages()
-	checkFirstAndLastPages()
 })
 
 const selectedRepository = computed(() => {
@@ -138,14 +133,22 @@ const moveScrollToTop = () => {
 	window.scrollTo(0, 0)
 }
 
-watch(selectedRepository, () => {
-	checkFirstAndLastPages()
-	moveScrollToTop()
-})
+watch(
+	selectedRepository,
+	() => {
+		checkFirstAndLastPages()
+		moveScrollToTop()
+	},
+	{ immediate: true }
+)
 
-watch(totalJobs, () => {
-	loadNumberOfPages()
-})
+watch(
+	totalJobs,
+	() => {
+		loadNumberOfPages()
+	},
+	{ immediate: true }
+)
 </script>
 
 <style scoped>
