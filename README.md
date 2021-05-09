@@ -73,6 +73,6 @@ Esse projeto utiliza:
 - Mobile First
 - [VS Code](https://code.visualstudio.com/) / [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-## 📝 License
+## 📝 Licença
 
-This project is [MIT](https://github.com/vbertazzo/vagas-dev/blob/main/LICENSE) licensed.
+Esse projeto usa a licença [MIT](https://github.com/vbertazzo/vagas-dev/blob/main/LICENSE).
